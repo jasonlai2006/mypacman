@@ -15,7 +15,7 @@ class Game {
             width:960,						//画布宽度
             height:640						//画布高度
         };
-        Object.assign(settings, params);
+        Object.assign(this, settings, params);
         (<HTMLElement>this.$canvas) = document.getElementById(id);
         this.$canvas.width = this.width;
         this.$canvas.height = this.height;
@@ -37,7 +37,7 @@ class Game {
             if (stage.timeout) {
                 stage.timeout--;
             }
-            if (stage.update() != false) {		            //update返回false,则不绘制
+            if (stage.update(stage) != false) {		            //update返回false,则不绘制
                 stage.maps.forEach((map) => {
                     if(!(f % map.frames)){
                         map.times = f / map.frames;		//计数器
@@ -45,7 +45,7 @@ class Game {
                     if(map.cache){
                         if(!map.imageData){
                             this._context.save();
-                            map.draw(this._context);
+                            map.draw(this._context, map);
                             map.imageData = this._context.getImageData(0, 0, this.width, this.height);
                             this._context.restore();
                         }else{
@@ -53,7 +53,7 @@ class Game {
                         }
                     }else{
                     	map.update();
-                        map.draw(this._context);
+                        map.draw(this._context, map);
                     }
                 });
                 stage.items.forEach((item) => {
@@ -67,9 +67,9 @@ class Game {
                         if(item.timeout){
                             item.timeout--;
                         }
-                        item.update();
+                        item.update(item);
                     }
-                    item.draw(this._context);
+                    item.draw(this._context, item);
                 });
             }
             this._hander = requestAnimationFrame(fn);

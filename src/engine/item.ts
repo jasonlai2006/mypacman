@@ -2,7 +2,7 @@ import Stage from './Stage';
 import ItemOptions from './item-options';
 
 class Item extends ItemOptions{
-    params: object;
+    params: ItemOptions;
     id: number = 0;             //标志符
     stage: Stage = null;        //与所属布景绑定
     settings: object = {
@@ -29,7 +29,7 @@ class Item extends ItemOptions{
         draw: function(){}		//绘制
     };
     
-    constructor(params?: object) {
+    constructor(params?: ItemOptions) {
         super();
         this.params = params||{};
         Object.assign(this, this.settings, this.params);

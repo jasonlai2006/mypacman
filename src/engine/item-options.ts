@@ -17,7 +17,7 @@ class ItemOptions {
     frames?: number;			//速度等级,内部计算器times多少帧变化一次
     times?: number;				//刷新画布计数(用于循环动画状态判断)
     timeout?: number;			//倒计时(用于过程动画状态判断)
-    control?: object;			//控制缓存,到达定位点时处理
+    control?: any;			//控制缓存,到达定位点时处理
     update?: Function; 	        //更新参数信息
     draw?: Function;		    //绘制
 }

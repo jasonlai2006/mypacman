@@ -3,7 +3,7 @@
         "target": "es6",
         "lib": ["es6", "dom", "dom.iterable", "scripthost", "es2017.object"],
         "noImplicitAny": false,
-        "noImplicitReturns": true,
+        "noImplicitReturns": false,
         "module": "commonjs",
         "outDir": "../dist",
         "rootDir": ".",
