@@ -18,5 +18,8 @@
         "preserveConstEnums": true,
         "allowSyntheticDefaultImports": true
     },
-    "exclude": [ "node_modules" ]
+    "exclude": [ "node_modules" ],
+    "includes": [
+        "./externals.d.ts"
+     ]
 }

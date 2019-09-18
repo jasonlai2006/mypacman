@@ -7,6 +7,11 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+// PostCss
+var autoprefixer = require('autoprefixer');
+var postcssVars = require('postcss-simple-vars');
+var postcssImport = require('postcss-import');
+
 module.exports = (env) => {
     const fileDefines = dotenv.config({
         path: env.DEFINE_PATH
@@ -31,7 +36,8 @@ module.exports = (env) => {
             open: 'http://localhost:3000'
         },
         entry: {
-            mypacman: ['./src/index.ts']
+            'lib.min': ['react', 'react-dom'],
+            'mypacman': ['./src/index.tsx']
         },
         output: {
             path: path.resolve(__dirname, 'build'),
@@ -54,15 +60,48 @@ module.exports = (env) => {
                     use: [{
                         loader: "css-loader",
                         options: {
-                            modules: true,
-                            localIdentName: '[name]_[local]_[hash:base64:5]',
-                            camelCase: true
+                            modules: {
+                                mode: 'local',
+                                localIdentName: '[name]_[local]_[hash:base64:5]',
+                                context: path.resolve(__dirname, 'src'),
+                            },
                         }
                     }, {
                         loader: "less-loader",
                         options: { javascriptEnabled: true }
                     }]
                 })
+            }, {
+                test: /\.css$/,
+                use: [{
+                    loader: 'style-loader'
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        modules: {
+                            mode: 'local',
+                            localIdentName: '[name]_[local]_[hash:base64:5]',
+                            context: path.resolve(__dirname, 'src'),
+                        },
+                        modules: true,
+                        importLoaders: 1,
+                        localsConvention: 'camelCase'
+                    }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        ident: 'postcss',
+                        plugins: function () {
+                            return [
+                                postcssImport,
+                                postcssVars,
+                                autoprefixer({
+                                    browsers: ['last 3 versions', 'Safari >= 8', 'iOS >= 8']
+                                })
+                            ];
+                        }
+                    }
+                }]
             }, {
                 test: /\.(svg|png|wav|gif|jpg)$/,
                 loader: 'file-loader',
@@ -90,11 +129,12 @@ module.exports = (env) => {
                 profile: true
             }),
             new HtmlWebpackPlugin({
-                chunks: ['mypacman', 'vendors' ],
+                chunks: ['lib.min', 'mypacman', 'vendors' ],
                 chunksSortMode: 'manual',
                 template: 'src/index.ejs',
                 title: 'Pacman'
             }),
+            new ExtractTextPlugin('css/[name].[chunkhash].css'),
             new CopyWebpackPlugin([{
                 from: 'static',
                 to: 'static'

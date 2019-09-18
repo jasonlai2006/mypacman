@@ -68,7 +68,6 @@ class Play {
                 context.textAlign = 'right';
                 context.textBaseline = 'bottom';
                 context.fillStyle = '#AAA';
-                context.fillText('© passer-by.com', i_this.x, i_this.y);
             }
         });
         //事件绑定
@@ -537,7 +536,7 @@ class Play {
             }
         });
         //事件绑定
-        stage.bind('keydown',function(e){
+        stage.bind('keydown',(e) => {
             switch(e.keyCode){
                 case 13: //回车
                 case 32: //空格
