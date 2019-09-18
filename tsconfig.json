@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["es6", "dom", "dom.iterable", "scripthost", "es2017.object"],
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "module": "commonjs",
+        "outDir": "../dist",
+        "rootDir": ".",
+        "newLine": "LF",
+        "sourceMap": true,
+        "moduleResolution": "node",
+        "isolatedModules": false,
+        "jsx": "react",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declaration": false,
+        "preserveConstEnums": true,
+        "allowSyntheticDefaultImports": true
+    },
+    "exclude": [ "node_modules" ]
+}
