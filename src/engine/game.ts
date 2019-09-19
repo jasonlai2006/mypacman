@@ -22,8 +22,7 @@ class Game {
         this._context = this.$canvas.getContext('2d');
         this._stages = [];					
         this._events = {};					
-        this._index=0;						
-        this._hander;  						
+        this._index = 0;						
     }
 
     start = () => {

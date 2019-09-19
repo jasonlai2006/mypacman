@@ -27,11 +27,11 @@ class Play {
         let stage = game.createStage();
         //logo
         stage.createItem({
-            x:game.width/2,
-            y:game.height*.45,
-            width:100,
-            height:100,
-            frames:3,
+            x: game.width / 2,
+            y: game.height * .45,
+            width: 100,
+            height: 100,
+            frames: 3,
             draw: (context: CanvasRenderingContext2D, i_this: Item) => {
                 let t = Math.abs(5 - i_this.times % 10);
                 context.fillStyle = '#FFE600';
@@ -83,7 +83,11 @@ class Play {
     //游戏主程序
     load = (game: Game) => {
         COIGIG.forEach((config,index) => {
-            let stage,map,beans,items,player,times;
+            let stage: Stage;
+            let map: Map;
+            let beans: Map;
+            let items: Array<Item>;
+            let player: Item;
             stage = game.createStage({
                 update: (s_this: Stage) => {
                     if (s_this.status == 1) {								//场景正常运行
@@ -123,9 +127,9 @@ class Play {
             });
             //绘制地图
             map = stage.createMap({
-                x:60,
-                y:10,
-                data:config['map'],
+                x: 60,
+                y: 10,
+                data: config['map'],
                 cache:true,
                 draw: (context: CanvasRenderingContext2D, m_this: Map) => {
                     context.lineWidth = 2;
