@@ -9,7 +9,7 @@ class Play {
     _SCORE: number;
     
     constructor() {
-        this._LIFE = 5;				//玩家生命值
+        this._LIFE = 100;			//玩家生命值
         this._SCORE = 0;			//玩家得分
     }
 
@@ -493,6 +493,7 @@ class Play {
             stage.bind('keydown',function(e){
                 switch(e.keyCode){
                     case 13: //回车
+                    game.nextStage();
                     case 32: //空格
                     this.status = this.status==2?1:2;
                     break;
@@ -545,7 +546,7 @@ class Play {
                 case 13: //回车
                 case 32: //空格
                 this._SCORE = 0;
-                this._LIFE = 5;
+                this._LIFE = 100;
                 game.setStage(1);
                 break;
             }

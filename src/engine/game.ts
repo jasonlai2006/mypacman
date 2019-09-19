@@ -1,4 +1,4 @@
-import Stage from './Stage';
+import Stage from './stage';
 
 class Game {
     width: number;

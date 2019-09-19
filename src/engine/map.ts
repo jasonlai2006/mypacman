@@ -1,4 +1,4 @@
-import Stage from './Stage';
+import Stage from './stage';
 import MapOptions from './map-options';
 
 interface Position {

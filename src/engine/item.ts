@@ -1,4 +1,4 @@
-import Stage from './Stage';
+import Stage from './stage';
 import ItemOptions from './item-options';
 
 class Item extends ItemOptions{
